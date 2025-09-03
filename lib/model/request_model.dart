@@ -2,10 +2,10 @@ import 'package:dio/dio.dart' as dio;
 
 // server endpoint
 // Main Server
-//const baseUrl = "http://5.189.156.172/BNI";
+const baseUrl = "http://5.189.156.172/BNI";
 
 // localHost
-const baseUrl = "http://192.168.0.153:3000/api/mobile";
+//const baseUrl = "http://192.168.0.153:3000/api/mobile";
 
 class BaseRequest {
   dio.Dio? httpClient;

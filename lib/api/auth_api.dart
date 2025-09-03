@@ -87,34 +87,34 @@ class Auth {
   ///
   /// Returns:
   /// - A `Future` that completes with a boolean indicating the success of the upload.
-  Future uploadPDF(
-      {required String filePath,
-      required WidgetRef ref,
-      sendProgress,
-      context}) async {
-    ApiResponse apiResponse = ApiResponse(apiStatus: ApiStatus.idle);
-    try {
-      BaseRequest request = BaseRequest(url: ApiUrls.updatePdf, files: [
-        {"dcp": filePath}
-      ]);
-      apiResponse = await ApiServices.instance
-          .postMultiFormRequestData(request, sendProgress: sendProgress);
-      if (apiResponse.isSuccess) {
-        await Auth.instance.getUserData(
-          ref: ref,
-        );
-        return true;
-      } else {
-        Strings.instance.getToast(msg: apiResponse.message ?? "");
+    Future uploadPDF(
+        {required String filePath,
+        required WidgetRef ref,
+        sendProgress,
+        context}) async {
+      ApiResponse apiResponse = ApiResponse(apiStatus: ApiStatus.idle);
+      try {
+        BaseRequest request = BaseRequest(url: ApiUrls.updatePdf, files: [
+          {"dcp": filePath}
+        ]);
+        apiResponse = await ApiServices.instance
+            .postMultiFormRequestData(request, sendProgress: sendProgress);
+        if (apiResponse.isSuccess) {
+          await Auth.instance.getUserData(
+            ref: ref,
+          );
+          return true;
+        } else {
+          Strings.instance.getToast(msg: apiResponse.message ?? "");
+          return false;
+        }
+      } catch (e) {
+        Strings.instance
+            .getToast(msg: apiResponse.message ?? "Something went wrong");
+        write(e.toString());
         return false;
       }
-    } catch (e) {
-      Strings.instance
-          .getToast(msg: apiResponse.message ?? "Something went wrong");
-      write(e.toString());
-      return false;
     }
-  }
 
   /// Sends a password reset request for the given [email].
   ///

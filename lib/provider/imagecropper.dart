@@ -35,8 +35,6 @@ class Cropper {
     required XFile pickedFile,
   }) async {
     final croppedFile = await ImageCropper().cropImage(
-      aspectRatioPresets: [CropAspectRatioPreset.original],
-      cropStyle: CropStyle.circle,
       sourcePath: pickedFile.path,
       compressFormat: ImageCompressFormat.jpg,
       compressQuality: 90,
